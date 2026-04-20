@@ -228,4 +228,50 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
         });
     });
+
+    // =========================================
+    // Zenith-Style 3D Tilt + Mouse Glow on Organizer Cards
+    // =========================================
+    function initZenithTilt(selector) {
+        document.querySelectorAll(selector).forEach(card => {
+            const glowEl = card.querySelector('.zenith-card-glow, .sponsor-card-glow');
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+
+                // 3D tilt — stronger than prize cards for dramatic Zenith feel
+                const tiltX = (y - 0.5) * -10;
+                const tiltY = (x - 0.5) * 10;
+
+                card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+
+                // Move glow to mouse position
+                if (glowEl) {
+                    glowEl.style.left = e.clientX - rect.left + 'px';
+                    glowEl.style.top = e.clientY - rect.top + 'px';
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
+                if (glowEl) {
+                    glowEl.style.opacity = '0';
+                }
+            });
+
+            card.addEventListener('mouseenter', () => {
+                if (glowEl) {
+                    glowEl.style.opacity = '1';
+                }
+            });
+        });
+    }
+
+    // Init tilt for organizer cards
+    initZenithTilt('.organizer-card.zenith-card');
+
+    // Init tilt for sponsor cards
+    initZenithTilt('.sponsor-card');
 });
