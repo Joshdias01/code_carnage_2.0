@@ -274,4 +274,172 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Init tilt for sponsor cards
     initZenithTilt('.sponsor-card');
+
+    // =========================================
+    // Gallery — Cinematic Film Reel
+    // =========================================
+    const galleryBtn     = document.getElementById('gallery-btn');
+    const gallerySection = document.getElementById('gallery');
+    const reelTrack      = document.getElementById('film-reel-track');
+    const reelScroll     = document.getElementById('film-reel-scroll');
+
+    // List every image in the gallery folder.
+    // Add more filenames here whenever new photos are dropped in.
+    const galleryImages = [
+        'gallery/1.JPG',
+        'gallery/2.JPG',
+        'gallery/3.JPG',
+        'gallery/4.JPG',
+        'gallery/5.JPG',
+        'gallery/6.JPG',
+        'gallery/7.JPG',
+        'gallery/8.JPG',
+        'gallery/9.JPG',
+        'gallery/10.JPG',
+        'gallery/11.JPG',
+        'gallery/12.JPG',
+        'gallery/13.JPG',
+        'gallery/14.JPG',
+        'gallery/15.JPG',
+        'gallery/16.JPG',
+        'gallery/17.JPG',
+        'gallery/18.JPG',
+        'gallery/19.JPG',
+
+    ];
+
+    let galleryBuilt  = false;
+    let galleryIsOpen = false;
+
+    // Build the film strip (original + clone for seamless loop)
+    function buildFilmReel() {
+        if (galleryBuilt || galleryImages.length === 0) return;
+        galleryBuilt = true;
+
+        // We need a fixed height; images fill it preserving aspect ratio.
+        // Width per frame is derived once the image loads.
+        const FRAME_H = 320; // px — matches CSS
+
+        function makeFrame(src) {
+            const frame = document.createElement('div');
+            frame.className = 'film-frame';
+            frame.style.height = FRAME_H + 'px';
+            // Start with a neutral width; update once img is loaded
+            frame.style.width  = Math.round(FRAME_H * 1.5) + 'px';
+
+            const img = document.createElement('img');
+            img.src     = src;
+            img.alt     = 'Hackathon moment';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+
+            img.onload = () => {
+                // Compute natural aspect ratio and set frame width
+                const ratio = img.naturalWidth / img.naturalHeight;
+                frame.style.width = Math.round(FRAME_H * ratio) + 'px';
+            };
+
+            frame.appendChild(img);
+            return frame;
+        }
+
+        // Build original set
+        galleryImages.forEach(src => reelTrack.appendChild(makeFrame(src)));
+
+        // Clone the whole set to make seamless infinite loop
+        // (CSS animation translates -50% so we need double the content)
+        galleryImages.forEach(src => reelTrack.appendChild(makeFrame(src)));
+    }
+
+    // Toggle gallery open / closed
+    function toggleGallery(e) {
+        e.preventDefault();
+
+        galleryIsOpen = !galleryIsOpen;
+
+        if (galleryIsOpen) {
+            // Build reel on first open (lazy)
+            buildFilmReel();
+
+            gallerySection.classList.add('gallery-open');
+            gallerySection.removeAttribute('aria-hidden');
+            galleryBtn.textContent = 'Close Gallery';
+
+            // Smooth scroll to gallery after it starts expanding
+            setTimeout(() => {
+                gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 120);
+        } else {
+            gallerySection.classList.remove('gallery-open');
+            gallerySection.setAttribute('aria-hidden', 'true');
+            galleryBtn.textContent = 'Gallery';
+        }
+    }
+
+    if (galleryBtn && gallerySection && reelTrack) {
+        galleryBtn.addEventListener('click', toggleGallery);
+    }
+
+    // ---- Drag / click-drag to scroll ----
+    if (reelScroll) {
+        let isDragging  = false;
+        let startX      = 0;
+        let scrollLeft  = 0;
+
+        reelScroll.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            reelScroll.classList.add('is-dragging');
+            reelTrack.classList.add('paused');
+            startX     = e.pageX - reelScroll.offsetLeft;
+            scrollLeft = reelScroll.scrollLeft;
+            e.preventDefault();
+        });
+
+        reelScroll.addEventListener('mouseleave', () => {
+            isDragging = false;
+            reelScroll.classList.remove('is-dragging');
+            reelTrack.classList.remove('paused');
+        });
+
+        reelScroll.addEventListener('mouseup', () => {
+            isDragging = false;
+            reelScroll.classList.remove('is-dragging');
+            // Resume auto scroll only if user isn't hovering a frame
+            reelTrack.classList.remove('paused');
+        });
+
+        reelScroll.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const x    = e.pageX - reelScroll.offsetLeft;
+            const walk = (x - startX) * 1.6; // drag speed multiplier
+            reelScroll.scrollLeft = scrollLeft - walk;
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        let touchScrollLeft = 0;
+
+        reelScroll.addEventListener('touchstart', (e) => {
+            touchStartX    = e.touches[0].pageX;
+            touchScrollLeft = reelScroll.scrollLeft;
+            reelTrack.classList.add('paused');
+        }, { passive: true });
+
+        reelScroll.addEventListener('touchmove', (e) => {
+            const dx = touchStartX - e.touches[0].pageX;
+            reelScroll.scrollLeft = touchScrollLeft + dx;
+        }, { passive: true });
+
+        reelScroll.addEventListener('touchend', () => {
+            reelTrack.classList.remove('paused');
+        }, { passive: true });
+
+        // Pause animation while mouse is over the strip
+        reelScroll.addEventListener('mouseenter', () => {
+            reelTrack.classList.add('paused');
+        });
+        reelScroll.addEventListener('mouseleave', () => {
+            if (!isDragging) reelTrack.classList.remove('paused');
+        });
+    }
 });

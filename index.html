@@ -62,7 +62,7 @@
             </p>
             <div class="hero-buttons animate-on-scroll">
                 <a href="#problemstatements" class="btn btn-white">
-                    Showcase
+                    Brochure
                     <span class="btn-arrow">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
@@ -70,8 +70,38 @@
                         </svg>
                     </span>
                 </a>
-                <a href="#organizers" class="btn btn-dark">Gallery</a>
+                <a href="#gallery" id="gallery-btn" class="btn btn-dark">Gallery</a>
             </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section (hidden by default, revealed on Gallery button click) -->
+    <section class="gallery-section" id="gallery" aria-hidden="true">
+        <div class="gallery-inner">
+            <div class="gallery-section-header">
+                <div class="gallery-header-line"></div>
+                <h2 class="gallery-title">Last Hackathon</h2>
+                <div class="gallery-header-line"></div>
+            </div>
+            <p class="gallery-subtitle">Moments from Code Carnage 1.0</p>
+            <!-- Film reel strip -->
+            <div class="film-reel-wrapper">
+                <div class="film-reel-edge film-reel-edge-top">
+                    <div class="film-holes-track" aria-hidden="true"></div>
+                </div>
+                <div class="film-reel-scroll" id="film-reel-scroll">
+                    <div class="film-reel-track" id="film-reel-track">
+                        <!-- images injected by JS -->
+                    </div>
+                </div>
+                <div class="film-reel-edge film-reel-edge-bottom">
+                    <div class="film-holes-track" aria-hidden="true"></div>
+                </div>
+                <!-- Left / Right fade vignettes -->
+                <div class="film-vignette film-vignette-left"></div>
+                <div class="film-vignette film-vignette-right"></div>
+            </div>
+            <p class="gallery-scroll-hint">drag or scroll to explore</p>
         </div>
     </section>
 
@@ -121,8 +151,17 @@
                     <div class="tl-glow-orb"></div>
                     <div class="tl-event-content">
                         <h3>Participant Check-in &amp; Verification</h3>
-                        <p>29th April – 08:00 AM → Participants check in and complete verification before the event
+                        <p>29th April – 08:00 AM to 09:00→ Participants check in and complete verification before the
+                            event
                             begins.</p>
+                    </div>
+                </div>
+
+                <div class="tl-event" data-tl-index="4">
+                    <div class="tl-glow-orb"></div>
+                    <div class="tl-event-content">
+                        <h3>Inauguration program</h3>
+                        <p>29th April – 09:00 AM → Official commencement of the hackathon and keynote address.</p>
                     </div>
                 </div>
 
@@ -130,7 +169,7 @@
                     <div class="tl-glow-orb"></div>
                     <div class="tl-event-content">
                         <h3>Problem Statement (PS) Launch</h3>
-                        <p>29th April – 09:30 AM → Official release of problem statements for participants.</p>
+                        <p>29th April – 10:15 AM → Official release of problem statements for participants.</p>
                     </div>
                 </div>
 
@@ -154,7 +193,7 @@
                     <div class="tl-glow-orb"></div>
                     <div class="tl-event-content">
                         <h3>Hackathon Coding Period Begins</h3>
-                        <p>29th April – 10:00 AM → 24-hour coding and development phase officially starts.</p>
+                        <p>29th April – 10:30 AM → 24-hour coding and development phase officially starts.</p>
                     </div>
                 </div>
 
@@ -162,7 +201,7 @@
                     <div class="tl-glow-orb"></div>
                     <div class="tl-event-content">
                         <h3>Hackathon Coding Period Ends</h3>
-                        <p>30th April – 10:00 AM → End of the coding and submission window.</p>
+                        <p>30th April – 10:30 AM → End of the coding and submission window.</p>
                     </div>
                 </div>
 
@@ -170,7 +209,7 @@
                     <div class="tl-glow-orb"></div>
                     <div class="tl-event-content">
                         <h3>Final Judging Round</h3>
-                        <p>30th April – 10:00 AM – 11:30 AM → Teams present their solutions to the judging
+                        <p>30th April – 10:30 AM – 11:30 AM → Teams present their solutions to the judging
                             panel.</p>
                     </div>
                 </div>
@@ -272,7 +311,7 @@
                         </svg>
                         <span class="prize-rank-badge">1st</span>
                     </div>
-                    <h4 class="prize-amount">₹30,000</h4>
+                    <h4 class="prize-amount">₹30,000 + Internship</h4>
                     <p>Top build that reached the absolute peak.</p>
                 </div>
                 <div class="tl-eve">
@@ -288,7 +327,7 @@
                         </svg>
                         <span class="prize-rank-badge">2nd</span>
                     </div>
-                    <h4 class="prize-amount">₹20,000</h4>
+                    <h4 class="prize-amount">₹20,000 + Internship</h4>
                     <p>Strong innovation with competitive edge.</p>
                 </div>
                 <div class="tl-eve">
@@ -304,7 +343,7 @@
                         </svg>
                         <span class="prize-rank-badge">3rd</span>
                     </div>
-                    <h4 class="prize-amount">₹10,000</h4>
+                    <h4 class="prize-amount">₹10,000 + Internship</h4>
                     <p>Strong fundamentals with impactful ideas.</p>
                 </div>
             </div>
@@ -320,7 +359,12 @@
             <div class="organizers-layout">
                 <div class="organizers-text animate-on-scroll">
                     <h2 class="organizers-title">Meet the Organizers</h2>
-                    <p>Numinous is a tech community. </p>
+                    <p>Numinous is a tech-driven community dedicated to building, learning, and innovating through
+                        real-world problem solving. We bring together passionate developers, designers, and thinkers
+                        to collaborate, explore new technologies, and create impactful solutions. From organizing
+                        hackathons
+                        like Code Carnage 2.0 to fostering a culture of continuous growth, Numinous is where ideas
+                        evolve into reality.</p>
                 </div>
                 <div class="organizers-grid">
                     <div class="organizer-card zenith-card animate-on-scroll" data-delay="0">
@@ -328,84 +372,84 @@
                         <div class="zenith-card-shine"></div>
                         <div class="organizer-header">
                             <div class="organizer-avatar">
-                                <div class="avatar-placeholder">1</div>
+                                <img src="organizers/bhoomika.jpg" alt="Person 1">
                             </div>
                             <div class="organizer-info">
-                                <h5>Person 1</h5>
-                                <span class="organizer-company">Name 1</span>
+                                <h5>Ms. Bhoomika S Babu</h5>
+                                <span class="organizer-company">ASST. PROFESSOR</span>
                             </div>
                         </div>
-                        <p>Tech team</p>
+                        <p>Faculty Coordinator</p>
                     </div>
                     <div class="organizer-card zenith-card animate-on-scroll" data-delay="1">
                         <div class="zenith-card-glow"></div>
                         <div class="zenith-card-shine"></div>
                         <div class="organizer-header">
                             <div class="organizer-avatar">
-                                <div class="avatar-placeholder">2</div>
+                                <img src="organizers/chandrashekar.png" alt="Person 1">
                             </div>
                             <div class="organizer-info">
-                                <h5>Person 2</h5>
-                                <span class="organizer-company">Name 2</span>
+                                <h5>Dr. Chandrashekar.D.K</h5>
+                                <span class="organizer-company">ASSOCIATE PROFESSOR</span>
                             </div>
                         </div>
-                        <p>Tech team</p>
+                        <p>Faculty Coordinator</p>
                     </div>
                     <div class="organizer-card zenith-card animate-on-scroll" data-delay="2">
                         <div class="zenith-card-glow"></div>
                         <div class="zenith-card-shine"></div>
                         <div class="organizer-header">
                             <div class="organizer-avatar">
-                                <div class="avatar-placeholder">3</div>
+                                <img src="organizers/ridhwan.jpeg" alt="Person 1">
                             </div>
                             <div class="organizer-info">
-                                <h5>Person 3</h5>
-                                <span class="organizer-company">Name 3</span>
+                                <h5>Mohammed Ridhwan</h5>
+                                <span class="organizer-company">Contact: 9845008463</span>
                             </div>
                         </div>
-                        <p>Tech team</p>
+                        <p>Student Coordinator</p>
                     </div>
-                    <div class="organizer-card zenith-card animate-on-scroll" data-delay="3">
+                    <div class="organizer-card zenith-card animate-on-scroll" data-delay="2">
                         <div class="zenith-card-glow"></div>
                         <div class="zenith-card-shine"></div>
                         <div class="organizer-header">
                             <div class="organizer-avatar">
-                                <div class="avatar-placeholder">4</div>
+                                <img src="organizers/manasvi.jpeg" alt="Person 1">
                             </div>
                             <div class="organizer-info">
-                                <h5>Person 4</h5>
-                                <span class="organizer-company">Name 4</span>
+                                <h5>Manasvi Y</h5>
+                                <span class="organizer-company">Contact: 8088352358</span>
                             </div>
                         </div>
-                        <p>Tech team</p>
+                        <p>Student Coordinator</p>
                     </div>
-                    <div class="organizer-card zenith-card animate-on-scroll" data-delay="4">
+                    <div class="organizer-card zenith-card animate-on-scroll" data-delay="2">
                         <div class="zenith-card-glow"></div>
                         <div class="zenith-card-shine"></div>
                         <div class="organizer-header">
                             <div class="organizer-avatar">
-                                <div class="avatar-placeholder">5</div>
+                                <img src="organizers/joshua.jpeg" alt="Person 1">
                             </div>
                             <div class="organizer-info">
-                                <h5>Person 5</h5>
-                                <span class="organizer-company">Name 5</span>
+                                <h5>Joshua Dias</h5>
+                                <span class="organizer-company">Contact: 7618776979</span>
                             </div>
                         </div>
-                        <p>Tech team</p>
+                        <p>Student Coordinator</p>
                     </div>
                     <div class="organizer-card zenith-card animate-on-scroll" data-delay="5">
                         <div class="zenith-card-glow"></div>
                         <div class="zenith-card-shine"></div>
                         <div class="organizer-header">
                             <div class="organizer-avatar">
-                                <div class="avatar-placeholder">6</div>
+                                <img src="organizers/sindhu.jpeg" alt="Person 1">
                             </div>
                             <div class="organizer-info">
-                                <h5>Person 6</h5>
-                                <span class="organizer-company">Name 6</span>
+                                <h5>Shakti Sindhu L</h5>
+                                <span class="organizer-company">Contact: 9353141080</span>
                             </div>
                         </div>
-                        <p>Tech team</p>
+                        <p>Student Coordinator</p>
                     </div>
                 </div>
             </div>
@@ -419,264 +463,312 @@
     <section class="sponsors-section" id="sponsors">
         <div class="section-container">
             <h2 class="section-title animate-on-scroll">Our Sponsors</h2>
-            <p class="sponsors-subtitle animate-on-scroll">Backed by industry leaders who believe in innovation</p>
-            <div class="sponsors-grid">
-                <a href="https://www.aiepoch.ai/" class="sponsor-card animate-on-scroll" target="_blank"
-                    rel="noopener noreferrer" data-delay="0">
-                    <div class="sponsor-card-glow"></div>
-                    <div class="sponsor-card-shine"></div>
-                    <div class="sponsor-logo-wrapper">
-                        <img src="aiepoch.png" alt="AI Epoch" class="sponsor-logo-img" loading="lazy">
-                    </div>
-                </a>
+            <p class="sponsors-subtitle animate-on-scroll"></p>
+            <div class="sponsors-grid sponsors-grid--3col">
                 <a href="https://www.gprov.com/" class="sponsor-card animate-on-scroll" target="_blank"
-                    rel="noopener noreferrer" data-delay="1">
+                    rel="noopener noreferrer" data-delay="0">
                     <div class="sponsor-card-glow"></div>
                     <div class="sponsor-card-shine"></div>
                     <div class="sponsor-logo-wrapper">
                         <img src="gpov.jpeg" alt="GPOV" class="sponsor-logo-img" loading="lazy">
                     </div>
                 </a>
-                <a href="https://www.mind2i.com/" class="sponsor-card animate-on-scroll" target="_blank"
-                    rel="noopener noreferrer" data-delay="2">
-                    <div class="sponsor-card-glow"></div>
-                    <div class="sponsor-card-shine"></div>
-                    <div class="sponsor-logo-wrapper">
-                        <img src="Mind2i Multi color logo.png" alt="Mind2i" class="sponsor-logo-img" loading="lazy">
-                    </div>
-                </a>
                 <a href="https://www.quadranttechnologies.com/" class="sponsor-card animate-on-scroll" target="_blank"
-                    rel="noopener noreferrer" data-delay="3">
+                    rel="noopener noreferrer" data-delay="1">
                     <div class="sponsor-card-glow"></div>
                     <div class="sponsor-card-shine"></div>
                     <div class="sponsor-logo-wrapper">
                         <img src="Quadrant.svg" alt="Quadrant" class="sponsor-logo-img" loading="lazy">
                     </div>
                 </a>
+                <a href="" class="sponsor-card animate-on-scroll" target="_blank" rel="noopener noreferrer"
+                    data-delay="2">
+                    <div class="sponsor-card-glow"></div>
+                    <div class="sponsor-card-shine"></div>
+                    <div class="sponsor-logo-wrapper">
+                        <img src="becorny.jpeg" alt="GPOV" class="sponsor-logo-img" loading="lazy">
+                    </div>
+                </a>
             </div>
         </div>
-    </section>
 
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
-
-    <!-- Venue Section -->
-    <section class="venue-section" id="venue">
-        <div class="section-container">
-            <div class="venue-content animate-on-scroll">
-                <div class="venue-label">Venue : <strong>SJBIT Institute of Technology</strong></div>
-                <div class="venue-grid">
-                    <div class="venue-map">
-                        <iframe
-                            src="https://maps.google.com/maps?q=SJBIT+Institute+of+Technology+BGS+Global+Institute+Kodipalya+Bengaluru&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                            width="100%" height="350" style="border:0; border-radius: 12px;" allowfullscreen=""
-                            loading="lazy">
-                        </iframe>
-                    </div>
-                    <div class="venue-info">
-                        <div class="transport-item">
-                            <div class="transport-icon">🚇</div>
-                            <div>
-                                <strong>Metro:</strong>
-                                <p>Get down at Kengeri Bus Terminal and it's 4.1 kilometers from there.</p>
-                            </div>
+        <section class="sponsors-section" id="sponsors">
+            <div class="section-container">
+                <h2 class="section-title animate-on-scroll">Collaboration Partners</h2>
+                <p class="sponsors-subtitle animate-on-scroll"></p>
+                <div class="sponsors-grid">
+                    <a href="https://www.mind2i.com/" class="sponsor-card animate-on-scroll" target="_blank"
+                        rel="noopener noreferrer" data-delay="2">
+                        <div class="sponsor-card-glow"></div>
+                        <div class="sponsor-card-shine"></div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="Mind2i Multi color logo.png" alt="Mind2i" class="sponsor-logo-img" loading="lazy">
                         </div>
-                        <div class="transport-item">
-                            <div class="transport-icon">🚂</div>
-                            <div>
-                                <strong>Train</strong>
-                                <p>4.4 kilometers from Kengeri Railway Station.</p>
-                            </div>
+                    </a>
+                    <a href="https://www.aiepoch.ai/" class="sponsor-card animate-on-scroll" target="_blank"
+                        rel="noopener noreferrer" data-delay="2">
+                        <div class="sponsor-card-glow"></div>
+                        <div class="sponsor-card-shine"></div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="aiepoch.png" alt="Mind2i" class="sponsor-logo-img" loading="lazy">
                         </div>
-                        <div class="transport-item">
-                            <div class="transport-icon">🚌</div>
-                            <div>
-                                <strong>Bus:</strong>
-                                <p>1.5 kilometers from BGS Hospital Bus Stand.</p>
-                            </div>
+                    </a>
+                    <a href="https://www.ieee.org/" class="sponsor-card animate-on-scroll" target="_blank"
+                        rel="noopener noreferrer" data-delay="3">
+                        <div class="sponsor-card-glow"></div>
+                        <div class="sponsor-card-shine"></div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="IEE-removebg-preview.png" alt="Quadrant" class="sponsor-logo-img" loading="lazy">
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
-
-    <!-- FAQ Section -->
-    <section class="faq-section" id="faq">
-        <div class="section-container">
-            <h2 class="section-title animate-on-scroll">FAQ</h2>
-            <div class="faq-list">
-                <div class="faq-item active animate-on-scroll">
-                    <button class="faq-question" aria-expanded="true">
-                        <span>What is Code Carnage 2.0?</span>
-                        <span class="faq-icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
-                                    stroke-width="2" stroke-linecap="round" />
-                                <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-                        </span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Code Carnage 2.0 is a 24-hour hackathon organized by the Data Science Department’s
-                            Numinous Technical Club, SJB Institute of Technology. It provides a platform for
-                            students to collaborate, innovate, and build technical solutions through coding.</p>
-                    </div>
-                </div>
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Who can participate?</span>
-                        <span class="faq-icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
-                                    stroke-width="2" stroke-linecap="round" />
-                                <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-                        </span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The hackathon is open to college students from any discipline,
-                            including BE, BTech, or any other technical background. Anyone with an interest in
-                            coding, technology, and problem-solving is welcome to participate.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Can students from different colleges form a team?</span>
-                        <span class="faq-icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
-                                    stroke-width="2" stroke-linecap="round" />
-                                <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-                        </span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes. Inter-college teams are allowed, and participants
-                            from different institutions can form a team.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Is Code Carnage 2.0 an individual or team-based hackathon?</span>
-                        <span class="faq-icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
-                                    stroke-width="2" stroke-linecap="round" />
-                                <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-                        </span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Code Carnage 2.0 is a team-based hackathon. Individual
-                            participation is not allowed. The team size is 2-4
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>What is the registration fee?</span>
-                        <span class="faq-icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
-                                    stroke-width="2" stroke-linecap="round" />
-                                <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-                        </span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The registration fee is ₹1000 per team (not per participant).</p>
-                    </div>
-                </div>
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>What food arrangements are provided?</span>
-                        <span class="faq-icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
-                                    stroke-width="2" stroke-linecap="round" />
-                                <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-                        </span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>On the first day, your food arrangements include 
-                            lunch, dinner, and snacks, followed by breakfast, coffee, 
-                            and tea on the second day.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer CTA -->
-    <section class="footer-cta" id="footer-cta">
-        <div class="section-container">
-            <div class="footer-cta-card animate-on-scroll">
-                <div class="footer-cta-glow"></div>
-                <div class="footer-cta-content">
-                    <h2>Pull Up to Code Carnage</h2>
-                    <p>24 hours. Real builders. Serious prizes.<br>No fluff—just execution.</p>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdhgYTv4Ud4RnToFPhx--lRPtU7PY3Hv_V9Ge5PzCXyHa-ZPw/viewform?usp=dialog"
-                        class="btn btn-white btn-large">
-                        Get Started
-                        <span class="btn-arrow">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
+                    </a>
+                    <a href="" class="sponsor-card animate-on-scroll" target="_blank" rel="noopener noreferrer"
+                        data-delay="3">
+                        <div class="sponsor-card-glow"></div>
+                        <div class="sponsor-card-shine"></div>
+                        <div class="sponsor-logo-wrapper">
+                            <img src="IISE-removebg-preview.png" alt="Quadrant" class="sponsor-logo-img" loading="lazy">
+                        </div>
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">
-                <img src="logo.png" alt="Code Carnage Logo" width="26" height="26"
-                    style="border-radius: 4px; object-fit: contain;">
+        <!-- Venue Section -->
+        <section class="venue-section" id="venue">
+            <div class="section-container">
+                <div class="venue-content animate-on-scroll">
+                    <div class="venue-label">Venue : <strong>SJB Institute of Technology</strong></div>
+                    <div class="venue-grid">
+                        <div class="venue-map">
+                            <iframe
+                                src="https://maps.google.com/maps?q=SJBIT+Institute+of+Technology+BGS+Global+Institute+Kodipalya+Bengaluru&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                                width="100%" height="350" style="border:0; border-radius: 12px;" allowfullscreen=""
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                        <div class="venue-info">
+                            <div class="transport-item">
+                                <div class="transport-icon">🚇</div>
+                                <div>
+                                    <strong>Metro:</strong>
+                                    <p>Get down at Kengeri Bus Terminal and it's 4.1 kilometers from there.</p>
+                                </div>
+                            </div>
+                            <div class="transport-item">
+                                <div class="transport-icon">🚂</div>
+                                <div>
+                                    <strong>Train</strong>
+                                    <p>4.4 kilometers from Kengeri Railway Station.</p>
+                                </div>
+                            </div>
+                            <div class="transport-item">
+                                <div class="transport-icon">🚌</div>
+                                <div>
+                                    <strong>Bus:</strong>
+                                    <p>1.5 kilometers from BGS Hospital Bus Stand.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="#hero">Home</a>
-                <a href="#stats">Stats</a>
-                <a href="#timeline">Schedule</a>
-                <a href="#problemstatements">Problem Statements</a>
-                <a href="#organizers">Organizers</a>
-                <a href="#faq">FAQ</a>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- FAQ Section -->
+        <section class="faq-section" id="faq">
+            <div class="section-container">
+                <h2 class="section-title animate-on-scroll">FAQ</h2>
+                <div class="faq-list">
+                    <div class="faq-item active animate-on-scroll">
+                        <button class="faq-question" aria-expanded="true">
+                            <span>What is Code Carnage 2.0?</span>
+                            <span class="faq-icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
+                                        stroke-width="2" stroke-linecap="round" />
+                                    <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Code Carnage 2.0 is a 24-hour hackathon organized by the Data Science Department’s
+                                Numinous Technical Club, SJB Institute of Technology. It provides a platform for
+                                students to collaborate, innovate, and build technical solutions through coding.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Who can participate?</span>
+                            <span class="faq-icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
+                                        stroke-width="2" stroke-linecap="round" />
+                                    <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The hackathon is open to college students from any discipline,
+                                including BE, BTech, or any other technical background. Anyone with an interest in
+                                coding, technology, and problem-solving is welcome to participate.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Can students from different colleges form a team?</span>
+                            <span class="faq-icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
+                                        stroke-width="2" stroke-linecap="round" />
+                                    <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. Inter-college teams are allowed, and participants
+                                from different institutions can form a team.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Is Code Carnage 2.0 an individual or team-based hackathon?</span>
+                            <span class="faq-icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
+                                        stroke-width="2" stroke-linecap="round" />
+                                    <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Code Carnage 2.0 is a team-based hackathon. Individual
+                                participation is not allowed. The team size is 2-4
+                            </p>
+                        </div>
+                    </div>
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>What is the registration fee?</span>
+                            <span class="faq-icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
+                                        stroke-width="2" stroke-linecap="round" />
+                                    <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The registration fee is ₹999 per team (not per participant).</p>
+                        </div>
+                    </div>
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>What food arrangements are provided?</span>
+                            <span class="faq-icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
+                                        stroke-width="2" stroke-linecap="round" />
+                                    <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>On the first day, your food arrangements include
+                                lunch, dinner, and snacks, followed by breakfast, coffee,
+                                and tea on the second day.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item animate-on-scroll">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>When is the last date for registration?</span>
+                            <span class="faq-icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <line class="faq-vert" x1="9" y1="3" x2="9" y2="15" stroke="var(--accent)"
+                                        stroke-width="2" stroke-linecap="round" />
+                                    <line x1="3" y1="9" x2="15" y2="9" stroke="var(--accent)" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The last date for registration is April 28th, 7:00 PM.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="footer-social">
-                <a href="https://www.instagram.com/numinous_01" class="social-link" aria-label="Instagram">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="20" rx="5" />
-                        <circle cx="12" cy="12" r="5" />
-                        <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
-                    </svg>
-                </a>
-                <!-- <a href="#" class="social-link" aria-label="X (Twitter)">
+        </section>
+
+        <!-- Footer CTA -->
+        <section class="footer-cta" id="footer-cta">
+            <div class="section-container">
+                <div class="footer-cta-card animate-on-scroll">
+                    <div class="footer-cta-glow"></div>
+                    <div class="footer-cta-content">
+                        <h2>Pull Up to Code Carnage</h2>
+                        <p>24 hours. Real builders. Serious prizes.<br>No fluff—just execution.</p>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdhgYTv4Ud4RnToFPhx--lRPtU7PY3Hv_V9Ge5PzCXyHa-ZPw/viewform?usp=dialog"
+                            class="btn btn-white btn-large">
+                            Get Started
+                            <span class="btn-arrow">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="Code Carnage Logo" width="26" height="26"
+                        style="border-radius: 4px; object-fit: contain;">
+                </div>
+                <div class="footer-links">
+                    <a href="#hero">Home</a>
+                    <a href="#stats">Stats</a>
+                    <a href="#timeline">Schedule</a>
+                    <a href="#problemstatements">Problem Statements</a>
+                    <a href="#organizers">Organizers</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/numinous_01" class="social-link" aria-label="Instagram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="5" />
+                            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <!-- <a href="#" class="social-link" aria-label="X (Twitter)">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                         <path
                             d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                     </svg>
-                </a>
-                <a href="#" class="social-link" aria-label="LinkedIn">
+                </a> -->
+                    <!-- <a href="#" class="social-link" aria-label="LinkedIn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -684,11 +776,11 @@
                         <circle cx="4" cy="4" r="2" />
                     </svg>
                 </a> -->
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <script src="script.js"></script>
+        <script src="script.js"></script>
 </body>
 
 </html>
