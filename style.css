@@ -531,7 +531,7 @@ ul {
 .hero-description {
     font-size: 1rem;
     color: var(--text-secondary);
-    max-width: 560px;
+    max-width: 600px;
     margin: 0 auto 36px;
     line-height: 1.7;
 }
