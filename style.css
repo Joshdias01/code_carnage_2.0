@@ -2274,3 +2274,228 @@ ul {
     content: ' ···';
     animation: galleryHintPulse 2s ease-in-out infinite;
 }
+
+/* =========================================
+   24-Hour Hackathon Countdown Timer
+   ========================================= */
+
+.hackathon-timer {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 0 auto 32px;
+    padding: 24px 40px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(217, 70, 239, 0.18);
+    border-radius: 20px;
+    backdrop-filter: blur(20px) saturate(1.3);
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 0 40px rgba(217, 70, 239, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* Top glass shine line */
+.hackathon-timer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.0) 10%,
+        rgba(217, 70, 239, 0.35) 40%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(217, 70, 239, 0.35) 60%,
+        rgba(255, 255, 255, 0.0) 90%,
+        transparent 100%);
+}
+
+/* Ambient corner glow */
+.hackathon-timer::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 80px;
+    background: radial-gradient(ellipse, rgba(217, 70, 239, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* Label row */
+.timer-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* Status dot — grey = idle, green = running, red = finished */
+.timer-label-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #555;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+.timer-label-dot.running {
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+    animation: timerDotPulse 1.4s ease-in-out infinite;
+}
+.timer-label-dot.finished {
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow-strong);
+}
+
+@keyframes timerDotPulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+}
+
+/* Digit display */
+.timer-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.timer-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.timer-digit {
+    font-family: var(--font-mono);
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1;
+    min-width: 2.4ch;
+    text-align: center;
+    /* Flip animation on digit change */
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.timer-digit.flip {
+    transform: translateY(-6px) scale(0.92);
+    opacity: 0.4;
+}
+
+/* Accent colour for hours when running */
+.hackathon-timer.timer-running .timer-digit {
+    color: var(--accent-light);
+    text-shadow: 0 0 20px rgba(217, 70, 239, 0.35);
+}
+
+.hackathon-timer.timer-finished .timer-digit {
+    color: #22c55e;
+    text-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+}
+
+.timer-unit-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.timer-colon {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    color: var(--text-muted);
+    margin-bottom: 14px;  /* offset to align with digits, not labels */
+    animation: colonBlink 1s step-start infinite;
+}
+
+@keyframes colonBlink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+}
+
+/* Admin Panel — hidden by default */
+.timer-admin-panel {
+    display: none;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.timer-admin-panel.admin-visible {
+    display: flex;
+}
+
+/* Admin buttons */
+.timer-admin-btn {
+    padding: 7px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--border-accent);
+    background: rgba(217, 70, 239, 0.08);
+    color: var(--accent-light);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.timer-admin-btn:hover {
+    background: rgba(217, 70, 239, 0.2);
+    border-color: var(--accent);
+    box-shadow: 0 0 14px rgba(217, 70, 239, 0.2);
+}
+
+.timer-btn-reset {
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.timer-btn-reset:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+    color: var(--text-primary);
+}
+
+/* Admin badge — small pill shown in timer when admin mode is active */
+.timer-admin-badge {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--border-accent);
+    border-radius: 4px;
+    padding: 2px 7px;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .hackathon-timer {
+        padding: 18px 20px 16px;
+    }
+    .timer-digit {
+        font-size: 2.2rem;
+        min-width: 2.2ch;
+    }
+    .timer-colon {
+        font-size: 2rem;
+    }
+}

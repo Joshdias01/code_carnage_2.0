@@ -49,25 +49,57 @@
 
 
             </div>
-            <div class="hero-badge animate-on-scroll">
-                24-Hour Hackathon
+            <!-- ===== 24-Hour Countdown Timer ===== -->
+            <div class="hackathon-timer animate-on-scroll" id="hackathon-timer">
+                <div class="timer-label">
+                    <span class="timer-label-dot" id="timer-status-dot"></span>
+                    <span id="timer-label-text">Hackathon Timer</span>
+                </div>
+                <div class="timer-display">
+                    <div class="timer-unit">
+                        <span class="timer-digit" id="timer-hours">24</span>
+                        <span class="timer-unit-label">HRS</span>
+                    </div>
+                    <div class="timer-colon">:</div>
+                    <div class="timer-unit">
+                        <span class="timer-digit" id="timer-minutes">00</span>
+                        <span class="timer-unit-label">MIN</span>
+                    </div>
+                    <div class="timer-colon">:</div>
+                    <div class="timer-unit">
+                        <span class="timer-digit" id="timer-seconds">00</span>
+                        <span class="timer-unit-label">SEC</span>
+                    </div>
+                </div>
+            <!-- Admin Panel (hidden by default, shown to admin only) -->
+            <div class="timer-admin-panel" id="timer-admin-panel">
+                    <button class="timer-admin-btn timer-btn-start" id="timer-btn-start">▶ Start Timer</button>
+                    <button class="timer-admin-btn timer-btn-reset" id="timer-btn-reset">↺ Reset</button>
+                </div>
             </div>
+            <!-- ===== End Timer ===== -->
+             <br>
+            <!-- <div class="hero-badge animate-on-scroll">
+                24-Hour Hackathon
+            </div> -->
             <h1 class="hero-title animate-on-scroll">
                 Where Builders Meet the Real World
                 <!-- <br> -->
             </h1>
             <p class="hero-description animate-on-scroll">
-                Code Carnage is your playground to build bold ideas and create real impact. Collaborate with like-minded developers, gain insights from industry professionals, and push your limits in a high-energy 24-hour sprint.
+                Code Carnage is your playground to build bold ideas and create real impact. Collaborate with like-minded
+                developers, gain insights from industry professionals, and push your limits in a high-energy 24-hour
+                sprint.
             </p>
             <div class="hero-buttons animate-on-scroll">
                 <a href="/brochure.pdf" download class="btn btn-white">
-                Brochure
-                <span class="btn-arrow">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </span>
+                    Brochure
+                    <span class="btn-arrow">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
                 </a>
                 <a href="#gallery" id="gallery-btn" class="btn btn-dark">Gallery</a>
             </div>

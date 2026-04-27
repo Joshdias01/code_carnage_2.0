@@ -1,0 +1,53 @@
+Everything is working perfectly! ✅ Here's a full summary of what was built and your **admin guide**:
+
+---
+
+## ✅ What Was Added
+
+The timer is live in the hero section — centered below the **Code Carnage 2.0** title, glassmorphism styled to match the Zenith theme with purple accents, live digit flip animations, and a pulsing green status dot when running.
+
+---
+
+## 🔐 Admin Guide — How to Use the Timer on April 29th
+
+### Step 1 — Open Admin Mode
+On the day of the hackathon, open your website with this special URL:
+```
+https://your-website-url.com/?admin=cc2admin
+```
+> This unlocks the **▶ Start Timer** and **↺ Reset** buttons inside the timer widget. Nobody else can see these buttons — they're hidden on the public URL.
+
+**Alternative:** If you're already on the page, press **`Ctrl + Shift + A`** to unlock admin mode without reloading.
+
+---
+
+### Step 2 — Start the Timer
+Once admin mode is unlocked, click **▶ Start Timer**.
+
+- The timer starts counting down from **24:00:00 → 00:00:00**
+- The status dot turns **green** and pulses
+- The label changes to **"Hackathon Live"**
+- The digits turn **purple** and glow
+
+> ⚠️ **Important:** The start time is saved in your browser's `localStorage`. This means **if you refresh the page, close it, or reopen it on the same browser**, the timer resumes exactly from where it left off — it won't reset.
+
+---
+
+### Step 3 — Share with Participants
+After starting, share the regular URL (without `?admin=cc2admin`) with everyone. They'll see the live countdown ticking. It syncs from your start time automatically.
+
+---
+
+### Reset (if needed)
+Click **↺ Reset** to wipe the timer and go back to `24:00:00`. You'll get a confirmation prompt first.
+
+---
+
+### What Happens at `00:00:00`
+- Digits turn **green**
+- Label shows **"Time's Up!"**
+- Dot turns **accent purple**
+
+---
+
+> **⚡ Tip for deployment:** Since the timer uses `localStorage`, it only syncs within the **same browser**. If participants open it on different devices, they'll all see the same countdown because the start time is baked in from the moment you clicked Start.

@@ -278,10 +278,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     // Gallery — Cinematic Film Reel
     // =========================================
-    const galleryBtn     = document.getElementById('gallery-btn');
+    const galleryBtn = document.getElementById('gallery-btn');
     const gallerySection = document.getElementById('gallery');
-    const reelTrack      = document.getElementById('film-reel-track');
-    const reelScroll     = document.getElementById('film-reel-scroll');
+    const reelTrack = document.getElementById('film-reel-track');
+    const reelScroll = document.getElementById('film-reel-scroll');
 
     // List every image in the gallery folder.
     // Add more filenames here whenever new photos are dropped in.
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ];
 
-    let galleryBuilt  = false;
+    let galleryBuilt = false;
     let galleryIsOpen = false;
 
     // Build the film strip (original + clone for seamless loop)
@@ -325,11 +325,11 @@ document.addEventListener('DOMContentLoaded', () => {
             frame.className = 'film-frame';
             frame.style.height = FRAME_H + 'px';
             // Start with a neutral width; update once img is loaded
-            frame.style.width  = Math.round(FRAME_H * 1.5) + 'px';
+            frame.style.width = Math.round(FRAME_H * 1.5) + 'px';
 
             const img = document.createElement('img');
-            img.src     = src;
-            img.alt     = 'Hackathon moment';
+            img.src = src;
+            img.alt = 'Hackathon moment';
             img.loading = 'lazy';
             img.decoding = 'async';
 
@@ -382,15 +382,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Drag / click-drag to scroll ----
     if (reelScroll) {
-        let isDragging  = false;
-        let startX      = 0;
-        let scrollLeft  = 0;
+        let isDragging = false;
+        let startX = 0;
+        let scrollLeft = 0;
 
         reelScroll.addEventListener('mousedown', (e) => {
             isDragging = true;
             reelScroll.classList.add('is-dragging');
             reelTrack.classList.add('paused');
-            startX     = e.pageX - reelScroll.offsetLeft;
+            startX = e.pageX - reelScroll.offsetLeft;
             scrollLeft = reelScroll.scrollLeft;
             e.preventDefault();
         });
@@ -410,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         reelScroll.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
-            const x    = e.pageX - reelScroll.offsetLeft;
+            const x = e.pageX - reelScroll.offsetLeft;
             const walk = (x - startX) * 1.6; // drag speed multiplier
             reelScroll.scrollLeft = scrollLeft - walk;
         });
@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let touchScrollLeft = 0;
 
         reelScroll.addEventListener('touchstart', (e) => {
-            touchStartX    = e.touches[0].pageX;
+            touchStartX = e.touches[0].pageX;
             touchScrollLeft = reelScroll.scrollLeft;
             reelTrack.classList.add('paused');
         }, { passive: true });
@@ -442,4 +442,170 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isDragging) reelTrack.classList.remove('paused');
         });
     }
+
+    // =========================================
+    // 24-Hour Hackathon Countdown Timer
+    // =========================================
+    (function () {
+        const DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours in ms
+        const STORAGE_KEY = 'cc2_timer_start';    // localStorage key
+
+        const timerEl = document.getElementById('hackathon-timer');
+        const hoursEl = document.getElementById('timer-hours');
+        const minutesEl = document.getElementById('timer-minutes');
+        const secondsEl = document.getElementById('timer-seconds');
+        const dotEl = document.getElementById('timer-status-dot');
+        const labelTextEl = document.getElementById('timer-label-text');
+        const adminPanel = document.getElementById('timer-admin-panel');
+        const btnStart = document.getElementById('timer-btn-start');
+        const btnReset = document.getElementById('timer-btn-reset');
+
+        if (!timerEl) return;
+
+        let tickInterval = null;
+
+        // ---- Helpers ----
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        /** Animate a digit change with a small flip */
+        function setDigit(el, val) {
+            const str = pad(val);
+            if (el.textContent === str) return;
+            el.classList.add('flip');
+            setTimeout(() => {
+                el.textContent = str;
+                el.classList.remove('flip');
+            }, 150);
+        }
+
+        /** Render remaining time from ms */
+        function render(remainMs) {
+            const totalSec = Math.max(0, Math.floor(remainMs / 1000));
+            const h = Math.floor(totalSec / 3600);
+            const m = Math.floor((totalSec % 3600) / 60);
+            const s = totalSec % 60;
+            setDigit(hoursEl, h);
+            setDigit(minutesEl, m);
+            setDigit(secondsEl, s);
+        }
+
+        /** Mark the timer as finished */
+        function markFinished() {
+            clearInterval(tickInterval);
+            tickInterval = null;
+            timerEl.classList.remove('timer-running');
+            timerEl.classList.add('timer-finished');
+            dotEl.className = 'timer-label-dot finished';
+            labelTextEl.textContent = 'Time\'s Up!';
+            btnStart.textContent = '▶ Start Timer';
+            render(0);
+        }
+
+        /** Start (or resume) the countdown */
+        function startTimer() {
+            const startTime = parseInt(localStorage.getItem(STORAGE_KEY), 10);
+            if (isNaN(startTime)) return;
+
+            timerEl.classList.add('timer-running');
+            timerEl.classList.remove('timer-finished');
+            dotEl.className = 'timer-label-dot running';
+            labelTextEl.textContent = 'Hackathon Live';
+            btnStart.textContent = '⏸ Running…';
+            btnStart.disabled = true;
+
+            // Tick every 500ms for accuracy
+            tickInterval = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                const remain = DURATION_MS - elapsed;
+                if (remain <= 0) {
+                    markFinished();
+                    localStorage.removeItem(STORAGE_KEY);
+                    return;
+                }
+                render(remain);
+            }, 500);
+
+            // Render immediately
+            const elapsed = Date.now() - startTime;
+            render(Math.max(0, DURATION_MS - elapsed));
+        }
+
+        /** On page load — check if timer was already started */
+        function restoreTimer() {
+            const startTime = parseInt(localStorage.getItem(STORAGE_KEY), 10);
+            if (isNaN(startTime)) return; // Never started
+
+            const elapsed = Date.now() - startTime;
+            if (elapsed >= DURATION_MS) {
+                // Already finished
+                markFinished();
+            } else {
+                startTimer();
+            }
+        }
+
+        // ---- Admin panel unlock ----
+        // Two ways to enter admin mode:
+        //   1. URL param:        yoursite.com/?admin=cc2admin
+        //   2. Keyboard:         Ctrl + Shift + A  (on the page)
+
+        function unlockAdmin() {
+            adminPanel.classList.add('admin-visible');
+            // Append the "ADMIN" badge next to label text if not already there
+            if (!document.getElementById('timer-admin-badge-el')) {
+                const badge = document.createElement('span');
+                badge.className = 'timer-admin-badge';
+                badge.id = 'timer-admin-badge-el';
+                badge.textContent = 'admin';
+                labelTextEl.parentNode.appendChild(badge);
+            }
+        }
+
+        // Check URL param
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('admin') === 'cc2admin') {
+            unlockAdmin();
+        }
+
+        // Keyboard shortcut: Ctrl + Shift + A
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                unlockAdmin();
+            }
+        });
+
+        // ---- Admin button handlers ----
+        btnStart.addEventListener('click', () => {
+            const existing = localStorage.getItem(STORAGE_KEY);
+            if (existing) return; // Already running
+
+            const startTime = Date.now();
+            localStorage.setItem(STORAGE_KEY, startTime);
+            startTimer();
+        });
+
+        btnReset.addEventListener('click', () => {
+            const confirmed = confirm('Reset the hackathon timer? This cannot be undone.');
+            if (!confirmed) return;
+
+            clearInterval(tickInterval);
+            tickInterval = null;
+            localStorage.removeItem(STORAGE_KEY);
+
+            timerEl.classList.remove('timer-running', 'timer-finished');
+            dotEl.className = 'timer-label-dot';
+            labelTextEl.textContent = 'Hackathon Timer';
+            btnStart.textContent = '▶ Start Timer';
+            btnStart.disabled = false;
+
+            // Reset digits to 24:00:00
+            hoursEl.textContent = '24';
+            minutesEl.textContent = '00';
+            secondsEl.textContent = '00';
+        });
+
+        // ---- Initialise ----
+        restoreTimer();
+    })();
+
 });
