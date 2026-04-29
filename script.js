@@ -448,7 +448,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     (function () {
         const DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours in ms
-        const STORAGE_KEY = 'cc2_timer_start';    // localStorage key
+
+        // ─────────────────────────────────────────────────────────────────
+        // HACKATHON_START_TIME — Unix timestamp (ms) of when the timer
+        // was officially started.  This value is shared by ALL devices.
+        //
+        // HOW TO UPDATE:
+        //   1. Open the site with ?admin=cc2admin
+        //   2. Click "▶ Start Timer" — your browser console will print
+        //      the exact timestamp to paste here.
+        //   3. Replace the number below, save, and redeploy to Vercel.
+        //
+        // Current value = 2026-04-29 10:30 AM IST (05:00 UTC)
+        // ─────────────────────────────────────────────────────────────────
+        const HACKATHON_START_TIME = 1777438800000; // ← 2026-04-29 10:30 AM IST | update if restarted
 
         const timerEl = document.getElementById('hackathon-timer');
         const hoursEl = document.getElementById('timer-hours');
@@ -497,61 +510,52 @@ document.addEventListener('DOMContentLoaded', () => {
             timerEl.classList.add('timer-finished');
             dotEl.className = 'timer-label-dot finished';
             labelTextEl.textContent = 'Time\'s Up!';
-            btnStart.textContent = '▶ Start Timer';
+            if (btnStart) btnStart.textContent = '▶ Start Timer';
             render(0);
         }
 
-        /** Start (or resume) the countdown */
-        function startTimer() {
-            const startTime = parseInt(localStorage.getItem(STORAGE_KEY), 10);
-            if (isNaN(startTime)) return;
-
+        /** Start the live countdown from HACKATHON_START_TIME */
+        function startLiveTimer(startTime) {
             timerEl.classList.add('timer-running');
             timerEl.classList.remove('timer-finished');
             dotEl.className = 'timer-label-dot running';
             labelTextEl.textContent = 'Hackathon Live';
-            btnStart.textContent = '⏸ Running…';
-            btnStart.disabled = true;
+            if (btnStart) { btnStart.textContent = '⏸ Running…'; btnStart.disabled = true; }
 
-            // Tick every 500ms for accuracy
             tickInterval = setInterval(() => {
-                const elapsed = Date.now() - startTime;
-                const remain = DURATION_MS - elapsed;
-                if (remain <= 0) {
-                    markFinished();
-                    localStorage.removeItem(STORAGE_KEY);
-                    return;
-                }
+                const remain = DURATION_MS - (Date.now() - startTime);
+                if (remain <= 0) { markFinished(); return; }
                 render(remain);
             }, 500);
 
-            // Render immediately
-            const elapsed = Date.now() - startTime;
-            render(Math.max(0, DURATION_MS - elapsed));
+            // Render immediately so there's no 500ms blank
+            render(Math.max(0, DURATION_MS - (Date.now() - startTime)));
         }
 
-        /** On page load — check if timer was already started */
+        /** On page load — always sync from the hardcoded start time */
         function restoreTimer() {
-            const startTime = parseInt(localStorage.getItem(STORAGE_KEY), 10);
-            if (isNaN(startTime)) return; // Never started
+            // 0 means timer hasn't been configured yet — show idle state
+            if (!HACKATHON_START_TIME) return;
 
-            const elapsed = Date.now() - startTime;
+            const elapsed = Date.now() - HACKATHON_START_TIME;
+            if (elapsed < 0) {
+                // Hackathon hasn't begun yet — show 24:00:00 static
+                return;
+            }
             if (elapsed >= DURATION_MS) {
-                // Already finished
                 markFinished();
             } else {
-                startTimer();
+                startLiveTimer(HACKATHON_START_TIME);
             }
         }
 
         // ---- Admin panel unlock ----
         // Two ways to enter admin mode:
-        //   1. URL param:        yoursite.com/?admin=cc2admin
-        //   2. Keyboard:         Ctrl + Shift + A  (on the page)
+        //   1. URL param:  yoursite.com/?admin=cc2admin
+        //   2. Keyboard:   Ctrl + Shift + A
 
         function unlockAdmin() {
             adminPanel.classList.add('admin-visible');
-            // Append the "ADMIN" badge next to label text if not already there
             if (!document.getElementById('timer-admin-badge-el')) {
                 const badge = document.createElement('span');
                 badge.className = 'timer-admin-badge';
@@ -561,50 +565,50 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Check URL param
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('admin') === 'cc2admin') {
-            unlockAdmin();
-        }
+        if (urlParams.get('admin') === 'cc2admin') unlockAdmin();
 
-        // Keyboard shortcut: Ctrl + Shift + A
         document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
-                unlockAdmin();
-            }
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') unlockAdmin();
         });
 
         // ---- Admin button handlers ----
-        btnStart.addEventListener('click', () => {
-            const existing = localStorage.getItem(STORAGE_KEY);
-            if (existing) return; // Already running
+        if (btnStart) {
+            btnStart.addEventListener('click', () => {
+                const now = Date.now();
+                // Print to console so admin can copy the value into HACKATHON_START_TIME
+                console.log('%c⏱ Timer started!', 'color:#0f0;font-size:14px;font-weight:bold;');
+                console.log('%cPaste this as HACKATHON_START_TIME in script.js, then redeploy:\n\n  const HACKATHON_START_TIME = ' + now + ';', 'color:#0ff;font-size:13px;');
+                alert(
+                    'Timer started!\n\n' +
+                    'To make ALL devices see this timer, update script.js:\n\n' +
+                    '  HACKATHON_START_TIME = ' + now + '\n\n' +
+                    'Then redeploy to Vercel. (Value also logged to console.)'
+                );
+                startLiveTimer(now);
+            });
+        }
 
-            const startTime = Date.now();
-            localStorage.setItem(STORAGE_KEY, startTime);
-            startTimer();
-        });
+        if (btnReset) {
+            btnReset.addEventListener('click', () => {
+                if (!confirm('Reset the hackathon timer? This cannot be undone.')) return;
 
-        btnReset.addEventListener('click', () => {
-            const confirmed = confirm('Reset the hackathon timer? This cannot be undone.');
-            if (!confirmed) return;
+                clearInterval(tickInterval);
+                tickInterval = null;
 
-            clearInterval(tickInterval);
-            tickInterval = null;
-            localStorage.removeItem(STORAGE_KEY);
+                timerEl.classList.remove('timer-running', 'timer-finished');
+                dotEl.className = 'timer-label-dot';
+                labelTextEl.textContent = 'Hackathon Timer';
+                btnStart.textContent = '▶ Start Timer';
+                btnStart.disabled = false;
 
-            timerEl.classList.remove('timer-running', 'timer-finished');
-            dotEl.className = 'timer-label-dot';
-            labelTextEl.textContent = 'Hackathon Timer';
-            btnStart.textContent = '▶ Start Timer';
-            btnStart.disabled = false;
+                hoursEl.textContent = '24';
+                minutesEl.textContent = '00';
+                secondsEl.textContent = '00';
+            });
+        }
 
-            // Reset digits to 24:00:00
-            hoursEl.textContent = '24';
-            minutesEl.textContent = '00';
-            secondsEl.textContent = '00';
-        });
-
-        // ---- Initialise ----
+        // ---- Initialise (runs for every visitor on every device) ----
         restoreTimer();
     })();
 
