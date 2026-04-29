@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //
         // Current value = 2026-04-29 10:30 AM IST (05:00 UTC)
         // ─────────────────────────────────────────────────────────────────
-        const HACKATHON_START_TIME = 1777438800000; // ← 2026-04-29 10:30 AM IST | update if restarted
+        const HACKATHON_START_TIME = 1777442400000; // ← 2026-04-29 11:30 AM IST | update if restarted
 
         const timerEl = document.getElementById('hackathon-timer');
         const hoursEl = document.getElementById('timer-hours');
